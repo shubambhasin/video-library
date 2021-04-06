@@ -9,31 +9,54 @@ import {
   isVideoInUnliked,
   ADD_TO_LIKED_VIDEOS,
   ADD_TO_UNLIKED_VIDEOS,
+  REMOVE_FROM_UNLIKED_VIDEOS,
+  REMOVE_FROM_LIKED_VIDEOS,
+  REMOVE_FROM_SAVED_VIDEOS,
+  REMOVE_FROM_HISTORY,
+  ADD_TO_HISTORY,
+  isWatched,
 } from "../reducer/actions";
 
 const Home = () => {
   const { state, dispatch } = useVideo();
 
+  // ADDING TO SAVED
+
   const addToSaved = (state, data) => {
     if (isVideoInSaved(state, data) === false) {
       dispatch({ type: ADD_TO_SAVED_VIDEOS, payload: data });
-    } else alert("Already saved 😊");
+    } else {
+      dispatch({ type: REMOVE_FROM_SAVED_VIDEOS, payload: data });
+    }
   };
+
+  // ADDING TO LIKED VIDEOS / REMOVING FROM UNLIKED
 
   const addToLiked = (state, data) => {
     if (isVideoInLiked(state, data) === false) {
       dispatch({ type: ADD_TO_LIKED_VIDEOS, payload: data });
+      dispatch({ type: REMOVE_FROM_UNLIKED_VIDEOS, payload: data });
     } else {
-      alert("Already in Liked videos");
+      dispatch({ type: REMOVE_FROM_LIKED_VIDEOS, payload: data });
     }
   };
+
+  // ADDING TO UNLIKED VIDEOS / REMOVING FROM LIKED VIDEOS
 
   const addToUnliked = (state, data) => {
     if (isVideoInUnliked(state, data) === false) {
       dispatch({ type: ADD_TO_UNLIKED_VIDEOS, payload: data });
+      dispatch({ type: REMOVE_FROM_LIKED_VIDEOS, payload: data });
     } else {
-      alert("Already unliked");
+      dispatch({ type: REMOVE_FROM_UNLIKED_VIDEOS, payload: data });
     }
+  };
+
+  // add to history
+
+  const addToHistory = (state, data) => {
+    dispatch({ type: REMOVE_FROM_HISTORY, payload: data });
+    dispatch({ type: ADD_TO_HISTORY, payload: data });
   };
 
   return (
@@ -85,6 +108,12 @@ const Home = () => {
                     : "Saved video"}
                 </button>
                 <button className="btn btn-orange">Add to playlist</button>
+                <button
+                  className="btn btn-green"
+                  onClick={() => addToHistory(state, data)}
+                >
+                  Watch now
+                </button>
               </span>
             </div>
           </div>

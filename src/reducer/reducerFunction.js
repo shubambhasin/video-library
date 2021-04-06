@@ -4,6 +4,9 @@ import {
   ADD_TO_UNLIKED_VIDEOS,
   REMOVE_FROM_SAVED_VIDEOS,
   REMOVE_FROM_LIKED_VIDEOS,
+  REMOVE_FROM_UNLIKED_VIDEOS,
+  ADD_TO_HISTORY,
+  REMOVE_FROM_HISTORY,
 } from "./actions";
 
 export const reducerFunction = (state, { type, payload }) => {
@@ -14,22 +17,45 @@ export const reducerFunction = (state, { type, payload }) => {
         savedVideos: [...state.savedVideos, payload],
       };
     case REMOVE_FROM_SAVED_VIDEOS:
-      return {};
+      return {
+        ...state,
+        savedVideos: state.savedVideos.filter((data) => data.id !== payload.id),
+      };
     case ADD_TO_LIKED_VIDEOS:
       return {
         ...state,
         likedVideos: [...state.likedVideos, payload],
       };
-      
-    case ADD_TO_UNLIKED_VIDEOS:
-        return {
-          ...state,
-          unlikedVideos: [...state.unlikedVideos, payload],
-        };
     case REMOVE_FROM_LIKED_VIDEOS:
-      return {};
+      return {
+        ...state,
+        likedVideos: state.likedVideos.filter((data) => data.id !== payload.id),
+      };
+
+    case ADD_TO_UNLIKED_VIDEOS:
+      return {
+        ...state,
+        unlikedVideos: [...state.unlikedVideos, payload],
+      };
+    case REMOVE_FROM_UNLIKED_VIDEOS:
+      return {
+        ...state,
+        unlikedVideos: state.unlikedVideos.filter(
+          (data) => data.id !== payload.id
+        ),
+      };
+    case ADD_TO_HISTORY:
+      return {
+        ...state,
+        history: [...state.history, payload],
+      };
+    case REMOVE_FROM_HISTORY:
+      return {
+        ...state,
+        history: state.history.filter((data) => data.id !== payload.id),
+      };
 
     default:
-      break;
+      alert("UNKNOWN ACTION, PLEASE CHECK");
   }
 };

@@ -16,18 +16,25 @@ export const isVideoInSaved = (state, video) => {
 };
 
 export const isVideoInLiked = (state, video) => {
-    if (state.likedVideos.filter((data) => data.id === video.id).length === 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-  
-  export const isVideoInUnliked = (state, video) => {
-    if (state.unlikedVideos.filter((data) => data.id === video.id).length === 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-  
+  if (state.likedVideos.filter((data) => data.id === video.id).length === 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export const isVideoInUnliked = (state, video) => {
+  if (state.unlikedVideos.filter((data) => data.id === video.id).length === 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export const isWatched = (state, video) => {
+  if (state.history.filter((data) => data.id === video.id).length === 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
