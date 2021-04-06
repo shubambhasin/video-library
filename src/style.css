@@ -1,0 +1,23 @@
+@import "https://ease-css.netlify.app/ease/css/ease.css";
+
+.check
+{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    padding: 1rem;
+    width: max-content;
+}
+.home-feed
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+place-content: center;
+
+}
+
+.video-card
+{
+    width: 200px;
+}

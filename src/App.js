@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./style.css";
+import Home from "./components/Home";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Saved from "./components/pages/Saved";
+import LikedVideos from "./components/pages/LikedVideos";
+import HistoryPage from "./components/pages/History";
+import Unliked from "./components/pages/Unliked";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <div className="App">
+       
+        <Navbar />
+
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/saved" exact component={Saved} />
+          <Route path="/liked" component={LikedVideos} />
+          <Route path="/unliked" component={Unliked} />
+          <Route path="/history" component={HistoryPage} />
+        </Switch>
+      </div>
+    </HashRouter>
   );
 }
 
